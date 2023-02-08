@@ -5,136 +5,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=1800,height=device-height,user-scalable=yes" />
+    <link rel="stylesheet" href="./static/style.css">
+    <link ref="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/lib/codemirror.min.css"/>
+    <link ref="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/theme/dracula.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/addon/hint/show-hint.css">
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/addon/hint/show-hint.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/addon/hint/anyword-hint.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/addon/edit/matchbrackets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5.52.0/mode/javascript/javascript.js"></script>
     <script src="./static/vue.min.js"></script>
     <script src="./static/jquery.min.js"></script>
     <title>The Cantonese Playground</title>
+
+
 </head>
-
-<script>
-    var vm = new Vue({
-        el : "#vm",
-        method : {
-
-        }
-    })
-</script>
-
-<style>
-    html,
-    body {
-        margin: 0px;
-        height: 100%;
-        font-family: monospace;
-    }
-
-    *:focus {
-        outline: none;
-    }
-
-    textarea {
-        width: 92%;
-        height: 92%;
-        margin: 2%;
-        padding: 2%;
-        resize: none;
-        border: none;
-        background-color: #E7FFDA;
-    }
-
-    #btn {
-        font-weight: bold;
-    }
-
-    #page {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    #code-place {
-        width: 50%;
-    }
-
-    #exec-place {
-        width: 50%;
-        padding-top: 20px;
-    }
-
-    #title {
-        margin-top: 20px;
-        font-weight: bold;
-    }
-
-    #exec {
-        margin-top: 30px;
-    }
-
-    #inner {
-        display: flex;
-        align-items: center;
-    }
-
-    #inner p {
-        margin-left: 10px;
-    }
-
-    #custom {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    #custom select {
-        margin-right: 20px;
-    }
-
-    #exit {
-        color: grey;
-    }
-</style>
 
 <body>
     <div id="page">
         <div id="code-place">
-            <textarea id="code" onkeydown="tab_catch(this)">
-
+            <textarea id="code" name="code">
 $binarySearch |数组, 数字| 要做咩:
-    讲嘢: |小下标| 系 0
-    讲嘢: |大下标| 系 |数组 嘅长度 减 1|
-    落操场玩跑步
-        讲嘢: |中间| 系 |(大下标 加 小下标) 整除 2|
-        如果 |数组[中间] 比唔上 数字| 嘅话 -> {
-            讲嘢: |小下标| 系 |中间 加 1|
-        }
-        定系 |数字 比唔上 数组[中间]| 嘅话 -> {
-            讲嘢: |大下标| 系 |中间 减 1|
-        }
-        唔系 嘅话 -> {
-            畀我睇下 "揾到啦!!!" 点样先
-            还数 啱
-        }
-    玩到 |大下标 比唔上 小下标 | 为止
-    畀我睇下 "揾唔到: (" 点样先
-    还数 唔啱
+讲嘢: |小下标| 系 0
+讲嘢: |大下标| 系 |数组 嘅长度 减 1|
+落操场玩跑步
+    讲嘢: |中间| 系 |(大下标 加 小下标) 整除 2|
+    如果 |数组[中间] 比唔上 数字| 嘅话 -> {
+        讲嘢: |小下标| 系 |中间 加 1|
+    }
+    定系 |数字 比唔上 数组[中间]| 嘅话 -> {
+        讲嘢: |大下标| 系 |中间 减 1|
+    }
+    唔系 嘅话 -> {
+        畀我睇下 "揾到啦!!!" 点样先
+        还数 啱
+    }
+玩到 |大下标 比唔上 小下标 | 为止
+畀我睇下 "揾唔到: (" 点样先
+还数 唔啱
 搞掂
-            
+    
 binarySearch 下 -> |[2, 3, 4, 10, 40], 10|
 binarySearch 下 -> |[2, 3, 4, 10, 40], 6|
-                    </textarea>
+</textarea>
         </div>
         <div id="exec-place">
             <div>
                 <div id="custom">
                     <p id="title">Cantonese PL Playground</p>
-                    <select id="custom-font" onclick="click_custom()">
-                        <option>Monaco</option>
-                        <option>Monospace</option>
-                        <option>Menlo</option>
-                        <option>Courier</option>
+                    <select id="custom-font">
+                        <option>Python</option>
+                        <option>Html</option>
+                        <option>LLVM-ir</option>
+                        <option>Javascript</option>
                     </select>
                 </div>
+
+                <textarea id="transcode">
+                </textarea>
+
+
                 <p>The current interpreter version is: {{.}}</p>
                 <p>Doc is here: <a target="_black" href="https://github.com/StepfenShawn/Cantonese/blob/main/doc/cantonese.md">cantonese-doc</a>
                 </p>
@@ -148,5 +78,29 @@ binarySearch 下 -> |[2, 3, 4, 10, 40], 6|
         </div>
     </div>
 </body>
+
+<script>
+    // TODO : fix bug here
+    /*
+    code_textarea = document.getElementById('code');
+    var editor = CodeMirror.fromTextArea(code_textarea, {
+        lineNumbers: true,
+        tabSize: 4,
+        value : code_textarea.value,
+        mode: 'javascript',
+        theme : 'dracula'
+    });
+
+    var trans_code_editor = CodeMirror(document.getElementById("transcode"), {
+        lineNumbers: true,
+        indentUnit: 4,
+        styleActiveLine: true,
+        matchBrackets: true,
+        mode: 'text/x-python', 
+        lineWrapping: true,
+        theme: 'dracula',
+    })
+    */
+</script>
 
 </html>
