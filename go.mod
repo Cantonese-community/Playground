@@ -1,2 +1,2 @@
-module src
+module app
 go 1.20

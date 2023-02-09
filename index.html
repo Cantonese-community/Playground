@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1800,height=device-height,user-scalable=yes">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/components/prism-clike.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/components/prism-c.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.17.1/themes/prism-dark.min.css">
+    <style>
+        html,
+body {
+    margin: 0px;
+    height: 100%;
+    font-family: monospace;
+}
+
+*:focus {
+    outline: none;
+}
+
+#code {
+    width: 92%;
+    height: 92%;
+    margin: 2%;
+    padding: 2%;
+    resize: none;
+    border: none;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:1em;
+    vertical-align:middle;
+    color: #f1f1f1;
+    font-weight:normal;
+    background-color: #252526;
+}
+
+#transcode {
+    width: 92%;
+    height: 500px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:1em;
+    vertical-align:middle;
+    color: #f1f1f1;
+    font-weight:normal;
+    background-color: #252526;
+}
+
+#btn {
+    font-weight: bold;
+}
+
+ #page {
+    height: 100%;
+}
+
+#transcode {
+    width: 92%;
+    height: 500px;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:1em;
+    vertical-align:middle;
+    color: #f1f1f1;
+    font-weight:normal;
+    background-color: #252526;
+}
+
+#btn {
+    font-weight: bold;
+}
+
+ #page {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#exec-place {
+    width: 35%;
+    padding-top: 20px;
+}
+
+#title {
+    margin-top: 20px;
+    width: 35%;
+    font-weight: bold;
+}
+
+#exec {
+    margin-top: 30px;
+}
+
+#inner {
+    display: flex;
+    align-items: center;
+}
+
+#inner p {
+    margin-left: 10px;
+}
+
+#custom {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#custom select {
+    margin-right: 20px;
+}
+
+#exit {
+    color: grey;
+}
+
+/* Please see the article */
+
+#editing, #highlighting {
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 10px;
+    padding: 10px;
+    border: 0;
+    width: 60%;
+    height: 100%;
+  }
+  #editing, #highlighting, #highlighting * {
+    /* Also add text styles to highlighing tokens */
+    font-size: 15pt;
+    line-height: 20pt;
+    tab-size: 2;
+  }
+  
+  
+  #editing, #highlighting {
+    /* In the same place */
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  
+  /* Move the textarea in front of the result */
+  
+  #editing {
+    z-index: 1;
+  }
+  #highlighting {
+    z-index: 0;
+  }
+  
+  
+  /* Make textarea almost completely transparent */
+  
+  #editing {
+    color: transparent;
+    background: transparent;
+    caret-color: white; /* Or choose your favourite color */
+  }
+  
+  /* Can be scrolled */
+  #editing, #highlighting {
+    overflow: auto;
+    white-space: nowrap; /* Allows textarea to scroll horizontally */
+  }
+  
+  /* No resize on textarea */
+  #editing {
+    resize: none;
+  }
+  
+  /* Paragraphs; First Image */
+  * {
+    font-family: "Fira Code", monospace;
+  }
+  p code {
+    border-radius: 2px;
+    background-color: #eee;
+    color: #252526;
+  }
+  
+  
+  code[class*="language-"],
+  pre[class*="language-"] {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 1em;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+  
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+  
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+  
+  /* Code blocks */
+  pre[class*="language-"] {
+    padding: .4em .8em;
+    margin: .5em 0;
+    overflow: auto;
+    /* background: url('data:image/svg+xml;charset=utf-8,<svg%20version%3D"1.1"%20xmlns%3D"http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg"%20width%3D"100"%20height%3D"100"%20fill%3D"rgba(0%2C0%2C0%2C.2)">%0D%0A<polygon%20points%3D"0%2C50%2050%2C0%200%2C0"%20%2F>%0D%0A<polygon%20points%3D"0%2C100%2050%2C100%20100%2C50%20100%2C0"%20%2F>%0D%0A<%2Fsvg>');
+    background-size: 1em 1em; - WebCoder49*/
+    background: #252526; /* - WebCoder49 */
+  }
+  
+  code[class*="language-"] {
+    background: #252526;
+    color: white;
+    box-shadow: -.3em 0 0 .3em #252526, .3em 0 0 .3em #252526;
+  }
+  
+  /* Inline code */
+  :not(pre) > code[class*="language-"] {
+    padding: .2em;
+    border-radius: .3em;
+    box-shadow: none;
+    white-space: normal;
+  }
+  
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #aaa;
+  }
+  
+  .token.punctuation {
+    color: #999;
+  }
+  
+  .token.namespace {
+    opacity: .7;
+  }
+  
+  .token.property,
+  .token.tag,
+  .token.boolean,
+  .token.number,
+  .token.constant,
+  .token.symbol {
+    color: #0cf;
+  }
+  
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin {
+    color: yellow;
+  }
+  
+  .token.operator,
+  .token.entity,
+  .token.url,
+  .language-css .token.string,
+  .token.variable,
+  .token.inserted {
+    color: yellowgreen;
+  }
+  
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword {
+    color: deeppink;
+  }
+  
+  .token.regex,
+  .token.important {
+    color: orange;
+  }
+  
+  .token.important,
+  .token.bold {
+    font-weight: bold;
+  }
+  .token.italic {
+    font-style: italic;
+  }
+  
+  .token.entity {
+    cursor: help;
+  }
+  
+  .token.deleted {
+    color: red;
+  }
+  
+  /* Plugin styles: Diff Highlight */
+  pre.diff-highlight.diff-highlight > code .token.deleted:not(.prefix),
+  pre > code.diff-highlight.diff-highlight .token.deleted:not(.prefix) {
+    background-color: rgba(255, 0, 0, .3);
+    display: inline;
+  }
+  
+  pre.diff-highlight.diff-highlight > code .token.inserted:not(.prefix),
+  pre > code.diff-highlight.diff-highlight .token.inserted:not(.prefix) {
+    background-color: rgba(0, 255, 128, .3);
+    display: inline;
+  }
+  
+  /* End of prism.js syntax highlighting*/
+    </style>
+    <script>
+        function update(text) {
+            let result_element = document.querySelector("#highlighting-content");
+            // Handle final newlines (see article)
+            if(text[text.length-1] == "\n") {
+                text += " ";
+            }
+            // Update code
+            result_element.innerHTML = text.replace(new RegExp("&", "g"), "&amp;").replace(new RegExp("<", "g"), "&lt;"); /* Global RegExp */
+            // Syntax Highlight
+            Prism.highlightElement(result_element);
+        }
+        
+        function sync_scroll(element) {
+            /* Scroll result to scroll coords of event - sync with textarea */
+            let result_element = document.querySelector("#highlighting");
+            // Get and set x and y
+            result_element.scrollTop = element.scrollTop;
+            result_element.scrollLeft = element.scrollLeft;
+        }
+        
+        function check_tab(element, event) {
+            let code = element.value;
+            if(event.key == "Tab") {
+                /* Tab key pressed */
+                event.preventDefault(); // stop normal
+                let before_tab = code.slice(0, element.selectionStart); // text before tab
+                let after_tab = code.slice(element.selectionEnd, element.value.length); // text after tab
+                let cursor_pos = element.selectionStart + 1; // where cursor moves after tab - moving forward by 1 char to after tab
+                element.value = before_tab + "\t" + after_tab; // add tab char
+                // move cursor
+                element.selectionStart = cursor_pos;
+                element.selectionEnd = cursor_pos;
+                update(element.value); // Update text to include indent
+            }
+        }
+    </script>
+    <title>The Cantonese Playground</title>
+</head>
+
+<body>
+    <div id="page">
+        <div id="code-place">
+            <textarea id="editing" 
+                spellcheck="false" oninput="update(this.value); sync_scroll(this);" 
+                onscroll="sync_scroll(this);" onkeydown="check_tab(this, event);">
+$binarySearch |数组, 数字| 要做咩:
+讲嘢: |小下标| 系 0
+讲嘢: |大下标| 系 |数组 嘅长度 减 1|
+落操场玩跑步
+    讲嘢: |中间| 系 |(大下标 加 小下标) 整除 2|
+    如果 |数组[中间] 比唔上 数字| 嘅话 -> {
+        讲嘢: |小下标| 系 |中间 加 1|
+    }
+    定系 |数字 比唔上 数组[中间]| 嘅话 -> {
+        讲嘢: |大下标| 系 |中间 减 1|
+    }
+    唔系 嘅话 -> {
+        畀我睇下 "揾到啦!!!" 点样先
+        还数 啱
+    }
+玩到 |大下标 比唔上 小下标 | 为止
+畀我睇下 "揾唔到: (" 点样先
+还数 唔啱
+搞掂
+    
+binarySearch 下 -> |[2, 3, 4, 10, 40], 10|
+binarySearch 下 -> |[2, 3, 4, 10, 40], 6|
+            
+            </textarea>
+            <pre id="highlighting" aria-hidden="true">
+                <code class="language-c" id="highlighting-content">
+$binarySearch |数组, 数字| 要做咩:
+讲嘢: |小下标| 系 0
+讲嘢: |大下标| 系 |数组 嘅长度 减 1|
+落操场玩跑步
+    讲嘢: |中间| 系 |(大下标 加 小下标) 整除 2|
+    如果 |数组[中间] 比唔上 数字| 嘅话 -> {
+        讲嘢: |小下标| 系 |中间 加 1|
+    }
+    定系 |数字 比唔上 数组[中间]| 嘅话 -> {
+        讲嘢: |大下标| 系 |中间 减 1|
+    }
+    唔系 嘅话 -> {
+        畀我睇下 "揾到啦!!!" 点样先
+        还数 啱
+    }
+玩到 |大下标 比唔上 小下标 | 为止
+畀我睇下 "揾唔到: (" 点样先
+还数 唔啱
+搞掂
+    
+binarySearch 下 -> |[2, 3, 4, 10, 40], 10|
+binarySearch 下 -> |[2, 3, 4, 10, 40], 6|
+                </code>
+            </pre>
+        </div>
+        <div id="exec-place">
+            <div>
+                <div id="custom">
+                    <p id="title">Cantonese PL Playground</p>
+                    <select id="custom-font">
+                        <option>Python</option>
+                        <option>Html</option>
+                        <option>LLVM-ir</option>
+                        <option>Javascript</option>
+                    </select>
+                </div>
+
+                <textarea id="transcode">
+                </textarea>
+
+
+                <p>The current interpreter version is: {{.}}</p>
+                <p>Doc is here: <a target="_black" href="https://github.com/StepfenShawn/Cantonese/blob/main/doc/cantonese.md">cantonese-doc</a>
+                </p>
+            </div>
+            <div id="inner">
+                <button id="btn" onclick="exec()">execute!</button>
+                <p id="status"></p>
+            </div>
+            <p id="result"></p>
+            <p id="exit"></p>
+        </div>
+    </div>
+</body>
+</html>
